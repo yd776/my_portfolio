@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yashas Dewan — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0f;
+      --surface:   #12121a;
+      --card:      #1a1a26;
+      --accent:    #7c6dfa;
+      --accent2:   #fa6d9f;
+      --text:      #e8e8f0;
+      --muted:     #6b6b80;
+      --border:    rgba(124,109,250,0.15);
+      --glow:      rgba(124,109,250,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 40px 28px;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-role {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 48px;
+    }
+
+    .nav-links { display: flex; flex-direction: column; gap: 4px; }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.87rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      transition: all 0.25s;
+    }
+
+    .nav-links a .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: var(--card);
+    }
+
+    .nav-links a:hover .dot,
+    .nav-links a.active .dot {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .nav-footer {
+      margin-top: auto;
+      font-size: 0.73rem;
+      color: var(--muted);
+    }
+
+    /* ── MAIN ── */
+    main { margin-left: 260px; }
+
+    section {
+      min-height: 100vh;
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .section-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 48px;
+      max-width: 520px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(124,109,250,0.12) 0%, transparent 70%);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--text) 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+    .btn-primary { background: var(--accent); color: #fff; border: none; }
+    .btn-primary:hover { background: #9585fb; transform: translateY(-2px); box-shadow: 0 8px 24px var(--glow); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 6px #4ade80;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.25s;
+    }
+    .stat-card:hover { border-color: var(--accent); }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── EDUCATION ── */
+    .timeline { display: flex; flex-direction: column; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 32px;
+      position: relative;
+    }
+    .timeline-item:not(:last-child) { padding-bottom: 48px; }
+
+    .timeline-year {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      padding-top: 6px;
+      text-align: right;
+      line-height: 1.4;
+    }
+
+    .timeline-body {
+      padding-left: 28px;
+      border-left: 1px solid var(--border);
+      position: relative;
+    }
+    .timeline-body::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 8px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--glow);
+    }
+
+    .timeline-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .timeline-school { font-size: 0.85rem; color: var(--accent); margin-bottom: 8px; }
+    .timeline-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--surface); }
+
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-radius: 3px 0 0 3px;
+    }
+    .exp-card:hover { border-color: var(--accent); transform: translateX(4px); }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .exp-company { font-size: 0.88rem; color: var(--accent); margin-top: 3px; }
+
+    .exp-badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .exp-badge.full { border-color: rgba(124,109,250,0.4); color: var(--accent); }
+    .exp-badge.intern { border-color: rgba(250,109,159,0.4); color: var(--accent2); }
+
+    .exp-duration { font-size: 0.8rem; color: var(--muted); margin-bottom: 14px; }
+    .exp-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+    .exp-desc strong { color: var(--text); font-weight: 500; }
+
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .exp-tag {
+      font-size: 0.75rem;
+      background: rgba(124,109,250,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(124,109,250,0.2);
+      border-radius: 6px;
+      padding: 3px 10px;
+    }
+
+    /* ── INTERESTS ── */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .interest-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px 26px;
+      transition: all 0.3s;
+    }
+    .interest-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .interest-icon { font-size: 2rem; margin-bottom: 14px; }
+    .interest-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .interest-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── HOBBIES ── */
+    .hobbies-list { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 48px; }
+
+    .hobby-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 12px 26px;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.25s;
+    }
+    .hobby-pill:hover { border-color: var(--accent2); color: var(--accent2); transform: scale(1.04); }
+    .hobby-pill span { font-size: 1.2rem; }
+
+    .hobbies-quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 24px;
+      color: var(--muted);
+      font-size: 1rem;
+      font-style: italic;
+      max-width: 560px;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+
+    .skill-group-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .skill-item { margin-bottom: 20px; }
+    .skill-meta { display: flex; justify-content: space-between; font-size: 0.83rem; color: var(--muted); margin-bottom: 8px; }
+    .skill-meta strong { color: var(--text); font-weight: 500; }
+    .skill-bar { height: 4px; background: var(--card); border-radius: 100px; overflow: hidden; }
+    .skill-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(124,109,250,0.1) 0%, transparent 70%);
+    }
+
+    .contact-inner { max-width: 600px; }
+
+    .contact-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .contact-heading em { font-style: normal; color: var(--accent); }
+    .contact-sub { color: var(--muted); font-size: 1rem; margin-bottom: 40px; }
+
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 24px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.25s;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
+    .contact-link-icon { font-size: 1.2rem; }
+    .contact-link-label { color: var(--muted); font-size: 0.75rem; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { width: 200px; padding: 32px 18px; }
+      main { margin-left: 200px; }
+      section { padding: 80px 36px; }
+      .about-grid, .interests-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav { display: none; }
+      main { margin-left: 0; }
+      section { padding: 60px 24px; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .timeline-year { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Yashas<span>.</span></div>
+  <div class="nav-role">AI Developer &amp; Engineer</div>
+  <div class="nav-links">
+    <a href="#hero" class="active"><span class="dot"></span> Home</a>
+    <a href="#about"><span class="dot"></span> About</a>
+    <a href="#education"><span class="dot"></span> Education</a>
+    <a href="#experience"><span class="dot"></span> Experience</a>
+    <a href="#interests"><span class="dot"></span> Interests</a>
+    <a href="#hobbies"><span class="dot"></span> Hobbies</a>
+    <a href="#skills"><span class="dot"></span> Skills</a>
+    <a href="#contact"><span class="dot"></span> Contact</a>
+  </div>
+  <div class="nav-footer">© 2025 Yashas Dewan</div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="status-badge">
+      <span class="status-dot"></span> Open to new opportunities
+    </div>
+    <p class="hero-eyebrow">Hello, I'm</p>
+    <h1 class="hero-name">Yashas<br>Dewan.</h1>
+    <p class="hero-tagline">
+     An upcoming <strong> MBA GRAD at XIM B </strong> an engineer by choice and 
+     a thirst for problem solving , previously worked in the AI and technlology field I know seek to move into using my knowledge for the AI driven future in the field of IT Consulting.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#about" class="btn btn-ghost">Learn more ↓</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label">01 — About me</p>
+      <h2 class="section-heading">Who I am</h2>
+      <p class="section-sub">A quick snapshot of my background and what drives me.</p>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>
+          I'm <strong>Yashas Dewan</strong>, an engineer who grew up in Pune and built a career
+          at the intersection of <strong>artificial intelligence and software engineering</strong>.
+          I completed my B.Tech from SRM University, Chennai, and haven't stopped building since.
+        </p>
+        <p>
+          My journey in AI started with a <strong>Data Science internship at EY</strong>, where I
+          got hands-on with real-world data problems. That experience led me to a full-time role
+          at <strong>Computacenter</strong>, where I spent two years developing AI-powered solutions.
+        </p>
+        <p>
+          I believe in writing clean code, asking better questions, and finding the elegant solution
+          in a sea of complexity. Outside of work, you'll find me on a sports field, at the theatre,
+          or hunting for the best food in town.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">2+</div>
+          <div class="stat-label">Years as AI Developer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Companies worked at</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">B.Tech</div>
+          <div class="stat-label">SRM University, Chennai</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Problems left to solve</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="reveal">
+      <p class="section-label">02 — Education</p>
+      <h2 class="section-heading">Academic journey</h2>
+      <p class="section-sub">The institutions that shaped how I think and approach problems.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-year">2019 – 2023</div>
+        <div class="timeline-body">
+          <div class="timeline-degree">B.Tech — Engineering</div>
+          <div class="timeline-school">SRM Institute of Science and Technology, Chennai</div>
+          <div class="timeline-desc">
+            Pursued my engineering degree in Chennai, diving deep into computer science fundamentals
+            and emerging technologies. This is where my serious interest in AI and machine learning took root —
+            far from home, surrounded by driven people, and fuelled by a lot of South Indian coffee.
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2017 – 2019</div>
+        <div class="timeline-body">
+          <div class="timeline-degree">Higher Secondary — Class 12th</div>
+          <div class="timeline-school">Pune, Maharashtra</div>
+          <div class="timeline-desc">
+            Completed my senior secondary education in Pune with a focus on the sciences.
+            These years cemented my analytical thinking and gave me the foundation I needed
+            to pursue engineering.
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">– 2017</div>
+        <div class="timeline-body">
+          <div class="timeline-degree">Secondary School — Class 10th</div>
+          <div class="timeline-school">Pune, Maharashtra</div>
+          <div class="timeline-desc">
+            Grew up in Pune — a city that shaped my curiosity, my love for culture,
+            and my competitive streak. The foundation years that started it all.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="reveal">
+      <p class="section-label">03 — Experience</p>
+      <h2 class="section-heading">Where I've worked</h2>
+      <p class="section-sub">Real-world problems, real-world impact.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">AI Developer</div>
+            <div class="exp-company">Computacenter</div>
+          </div>
+          <span class="exp-badge full">Full-time · 2 Years</span>
+        </div>
+        <div class="exp-duration">2022 – 2024</div>
+        <div class="exp-desc">
+          Worked as an <strong>AI Developer</strong> building and deploying intelligent systems
+          across enterprise environments. Developed machine learning models, designed AI pipelines,
+          and collaborated with cross-functional teams to turn complex business requirements into
+          scalable solutions. Gained deep experience shipping AI products in production.
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Machine Learning</span>
+          <span class="exp-tag">AI Development</span>
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Production Systems</span>
+          <span class="exp-tag">Enterprise Tech</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Data Science Intern</div>
+            <div class="exp-company">Ernst &amp; Young (EY)</div>
+          </div>
+          <span class="exp-badge intern">Internship · 3 Months</span>
+        </div>
+        <div class="exp-duration">2022</div>
+        <div class="exp-desc">
+          My first real dive into professional data science at one of the Big Four.
+          Worked on <strong>data analysis, modelling, and insight generation</strong> within
+          EY's data science practice. Learned to translate messy real-world data into
+          structured, actionable findings — and learned quickly that clean data is a rare luxury.
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Data Science</span>
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Data Analysis</span>
+          <span class="exp-tag">Visualisation</span>
+          <span class="exp-tag">EY</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <div class="reveal">
+      <p class="section-label">04 — Interests</p>
+      <h2 class="section-heading">What excites me</h2>
+      <p class="section-sub">The domains I find myself thinking about most — professionally and otherwise.</p>
+    </div>
+    <div class="interests-grid reveal">
+      <div class="interest-card">
+        <div class="interest-icon">🤖</div>
+        <div class="interest-title">Artificial Intelligence</div>
+        <div class="interest-desc">From LLMs to computer vision — I'm fascinated by systems that learn and the problems they unlock.</div>
+      </div>
+      <div class="interest-card">
+        <div class="interest-icon">📊</div>
+        <div class="interest-title">Data &amp; Analytics</div>
+        <div class="interest-desc">Finding signal in the noise. Good data tells a story; great analysis changes how decisions get made.</div>
+      </div>
+      <div class="interest-card">
+        <div class="interest-icon">⚙️</div>
+        <div class="interest-title">Systems Design</div>
+        <div class="interest-desc">How do you build things that scale, stay reliable, and don't fall apart? That's the puzzle I keep returning to.</div>
+      </div>
+      <div class="interest-card">
+        <div class="interest-icon">🎭</div>
+        <div class="interest-title">Theatre &amp; Drama</div>
+        <div class="interest-desc">The stage teaches you things a screen never can — presence, empathy, and how to read a room.</div>
+      </div>
+      <div class="interest-card">
+        <div class="interest-icon">🏅</div>
+        <div class="interest-title">Sports &amp; Performance</div>
+        <div class="interest-desc">What elite performance looks like — in athletes, in teams, and in how that mindset applies to work.</div>
+      </div>
+      <div class="interest-card">
+        <div class="interest-icon">🌱</div>
+        <div class="interest-title">Continuous Learning</div>
+        <div class="interest-desc">Tech moves fast. The best engineers I know are the ones who stayed curious and never stopped asking "why."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBIES -->
+  <section id="hobbies">
+    <div class="reveal">
+      <p class="section-label">05 — Hobbies</p>
+      <h2 class="section-heading">When I'm offline</h2>
+      <p class="section-sub">Life beyond the IDE — things I do because they genuinely light me up.</p>
+    </div>
+    <div class="hobbies-list reveal">
+      <div class="hobby-pill"><span>🏏</span> Sports</div>
+      <div class="hobby-pill"><span>🏋️</span> Gym</div>
+      <div class="hobby-pill"><span>🚶</span> Walking</div>
+      <div class="hobby-pill"><span>🍽️</span> Eating / Food</div>
+      <div class="hobby-pill"><span>🎭</span> Theatre &amp; Drama</div>
+    </div>
+    <blockquote class="hobbies-quote reveal">
+      "The gym teaches discipline. Sports teaches teamwork. Theatre teaches everything else."
+    </blockquote>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="reveal">
+      <p class="section-label">06 — Skills</p>
+      <h2 class="section-heading">What I bring</h2>
+      <p class="section-sub">Technical depth from real-world experience, paired with skills that make teams work better.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div>
+        <div class="skill-group-title">Technical</div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Python</strong><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Machine Learning</strong><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Data Science &amp; Analytics</strong><span>82%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>AI Development</strong><span>88%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>SQL &amp; Data Engineering</strong><span>75%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Personal</div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Problem Solving</strong><span>92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Communication</strong><span>88%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Team Collaboration</strong><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Adaptability</strong><span>95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="95"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-meta"><strong>Critical Thinking</strong><span>87%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="87"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT --> 
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="reveal">
+        <p class="section-label">07 — Contact</p>
+        <h2 class="contact-heading">Let's <em>connect.</em></h2>
+        <p class="contact-sub">
+          Whether it's a project, a role, or just a good conversation     I'm always up for it. Drop me a message.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:yashasdewan@gmail.com" class="contact-link">
+        <img src="https://www.svgrepo.com/show/243092/gmail.svg" width="28" height="28" style="flex-shrink:0;" />
+        <div>
+          <div>yashasdewan@gmail.com</div>
+          <div class="contact-link-label">Gmail</div>
+        </div>
+      </a>
+<a href="https://linkedin.com/in/yashasdewan" target="_blank" class="contact-link">
+  <img src="https://www.svgrepo.com/show/469190/linkedin.svg" width="28" height="28" style="flex-shrink:0;" />
+  <div>
+    <div>linkedin.com/in/yashasdewan</div>
+    <div class="contact-link-label">LinkedIn</div>
+  </div>
+</a>
+<a href="https://github.com/yd776" target="_blank" class="contact-link">
+  <img src="https://www.svgrepo.com/show/507717/github-square.svg" width="28" height="28" style="filter: invert(1); flex-shrink:0;" />
+  <div>
+    <div>github.com/yd776</div>
+    <div class="contact-link-label">GitHub</div>
+  </div>
+</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const activeObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(s => activeObs.observe(s));
+
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+</body>
+</html>
