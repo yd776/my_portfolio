@@ -736,23 +736,95 @@
   </section>
 
   <!-- HOBBIES -->
-  <section id="hobbies">
-    <div class="reveal">
-      <p class="section-label">05 — Hobbies</p>
-      <h2 class="section-heading">When I'm offline</h2>
-      <p class="section-sub">Life beyond the IDE — things I do because they genuinely light me up.</p>
+<section id="hobbies">
+  <div class="reveal">
+    <p class="section-label">05 — Hobbies</p>
+    <h2 class="section-heading">When I'm offline</h2>
+    <p class="section-sub">Life beyond the IDE — things I do because they genuinely light me up.</p>
+  </div>
+  <div class="hobbies-list reveal">
+
+    <div class="hobby-pill" data-images="https://images.unsplash.com/photo-1540747913346-19212a4cf528?w=300&q=80,https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=300&q=80">
+      <img src="https://api.iconify.design/mdi:cricket.svg?color=white" width="20" height="20" /> Sports
     </div>
-    <div class="hobbies-list reveal">
-      <div class="hobby-pill"><span>🏏</span> Sports</div>
-      <div class="hobby-pill"><span>🏋️</span> Gym</div>
-      <div class="hobby-pill"><span>🚶</span> Walking</div>
-      <div class="hobby-pill"><span>🍽️</span> Eating / Food</div>
-      <div class="hobby-pill"><span>🎭</span> Theatre &amp; Drama</div>
+
+    <div class="hobby-pill" data-images="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&q=80,https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=300&q=80">
+      <img src="https://api.iconify.design/mdi:dumbbell.svg?color=white" width="20" height="20" /> Gym
     </div>
-    <blockquote class="hobbies-quote reveal">
-      "The gym teaches discipline. Sports teaches teamwork. Theatre teaches everything else."
-    </blockquote>
-  </section>
+
+    <div class="hobby-pill" data-images="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=300&q=80,https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=300&q=80">
+      <img src="https://api.iconify.design/mdi:walk.svg?color=white" width="20" height="20" /> Walking
+    </div>
+
+    <div class="hobby-pill" data-images="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80,https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=300&q=80">
+      <img src="https://api.iconify.design/mdi:food.svg?color=white" width="20" height="20" /> Eating / Food
+    </div>
+
+    <div class="hobby-pill" data-images="https://images.unsplash.com/photo-1503095396549-807759245b35?w=300&q=80,https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&q=80">
+      <img src="https://api.iconify.design/mdi:drama-masks.svg?color=white" width="20" height="20" /> Theatre &amp; Drama
+    </div>
+
+  </div>
+
+  <!-- Hover popup -->
+  <div id="hobby-popup" style="
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    ">
+  </div>
+
+  <blockquote class="hobbies-quote reveal">
+    "The gym teaches discipline. Sports teaches teamwork. Theatre teaches everything else."
+  </blockquote>
+
+  <script>
+    const popup = document.getElementById('hobby-popup');
+    let currentPill = null;
+
+    document.querySelectorAll('.hobby-pill[data-images]').forEach(pill => {
+      pill.addEventListener('mouseenter', (e) => {
+        currentPill = pill;
+        const urls = pill.dataset.images.split(',');
+        popup.innerHTML = urls.map(url => `
+          <img src="${url}" style="
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(124,109,250,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            display: block;
+          " />
+        `).join('');
+        popup.style.display = 'flex';
+      });
+
+      pill.addEventListener('mousemove', (e) => {
+        const popupW = 200;
+        const popupH = popup.offsetHeight;
+        let x = e.clientX + 20;
+        let y = e.clientY - popupH / 2;
+
+        // Keep within viewport
+        if (x + popupW > window.innerWidth) x = e.clientX - popupW - 20;
+        if (y < 10) y = 10;
+        if (y + popupH > window.innerHeight - 10) y = window.innerHeight - popupH - 10;
+
+        popup.style.left = x + 'px';
+        popup.style.top  = y + 'px';
+      });
+
+      pill.addEventListener('mouseleave', () => {
+        popup.style.display = 'none';
+        currentPill = null;
+      });
+    });
+  </script>
+</section>
 
 <!-- SKILLS -->
 <section id="skills">
@@ -767,7 +839,7 @@
       <div class="skill-item">
         <div class="skill-meta">
           <strong style="display:flex; align-items:center; gap:8px;">
-            <img src="https://www.svgrepo.com/show/424982/communication.svg" width="18" height="18" style="filter:invert(1); opacity:0.8;" />
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/team-communication-icon.png" width="18" height="18" style="filter:invert(1); opacity:0.8;" />
             Communication
           </strong>
           <span>88%</span>
