@@ -526,22 +526,85 @@
 
 <main>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="status-badge">
-      <span class="status-dot"></span> Open to new opportunities
+<!-- HERO -->
+<section id="hero">
+
+  <style>
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+    }
+
+    .hero-image img {
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .hero-image img {
+        width: 220px;
+        height: 220px;
+      }
+    }
+  </style>
+
+  <div class="hero-content">
+
+    <div class="hero-text">
+
+      <div class="status-badge">
+        <span class="status-dot"></span> Open to new opportunities
+      </div>
+
+      <p class="hero-eyebrow">Hello, I'm</p>
+
+      <h1 class="hero-name">
+        Yashas<br>Dewan.
+      </h1>
+
+      <p class="hero-tagline">
+        An upcoming <strong>MBA graduate at XIMB</strong>, an engineer by choice,
+        and a problem solver at heart. Having previously worked in the AI and
+        technology domain, I now aspire to combine technical expertise with
+        business strategy to help organizations navigate the AI-driven future
+        through technology and IT consulting.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in touch</a>
+        <a href="#about" class="btn btn-ghost">Learn more ↓</a>
+      </div>
+
     </div>
-    <p class="hero-eyebrow">Hello, I'm</p>
-    <h1 class="hero-name">Yashas<br>Dewan.</h1>
-    <p class="hero-tagline">
-     An upcoming <strong> MBA GRAD at XIM B </strong> an engineer by choice and 
-     a thirst for problem solving , previously worked in the AI and technlology field I know seek to move into using my knowledge for the AI driven future in the field of IT Consulting.
-    </p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">Get in touch</a>
-      <a href="#about" class="btn btn-ghost">Learn more ↓</a>
+
+    <div class="hero-image">
+      <img
+        src="https://raw.githubusercontent.com/yd776/my_portfolio/refs/heads/main/my%20pic%201.jpg"
+        alt="Yashas Dewan">
     </div>
-  </section>
+
+  </div>
+
+</section>
 
   <!-- ABOUT -->
   <section id="about">
@@ -553,25 +616,24 @@
     <div class="about-grid reveal">
       <div class="about-text">
         <p>
-          I'm <strong>Yashas Dewan</strong>, an engineer who grew up in Pune and built a career
-          at the intersection of <strong>artificial intelligence and software engineering</strong>.
-          I completed my B.Tech from SRM University, Chennai, and haven't stopped building since.
+          I'm <strong>Yashas Dewan</strong>, originally from Delhi, but currently now seteled in Pune for the past 8 years
+          I completed by UG from SRM Chennai and then moved to bangalore to work at Computacenter which is a UK based IT company.
+          Im now pursuing my Post graduation at XIM B with an interest to study other areas of the Business.
         </p>
         <p>
-          My journey in AI started with a <strong>Data Science internship at EY</strong>, where I
-          got hands-on with real-world data problems. That experience led me to a full-time role
-          at <strong>Computacenter</strong>, where I spent two years developing AI-powered solutions.
+           I love to travel and explore new streets and places whereever I go to , hence I walk a lot and it has developed to be one of my passions
+           apart from that I play all kinds of sports , I beleive in the art of learning by failing where i try  to solve a problem first 
+           if it does not work then i get more insights and education.
+
+           I am also a big foodie wheather there is a food festival or a new type of restraunt which is open in the area you can count on me to be there
         </p>
         <p>
-          I believe in writing clean code, asking better questions, and finding the elegant solution
-          in a sea of complexity. Outside of work, you'll find me on a sports field, at the theatre,
-          or hunting for the best food in town.
         </p>
       </div>
       <div class="about-stats">
         <div class="stat-card">
-          <div class="stat-number">2+</div>
-          <div class="stat-label">Years as AI Developer</div>
+          <div class="stat-number">2</div>
+          <div class="stat-label">Years Experience</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">2</div>
@@ -583,7 +645,7 @@
         </div>
         <div class="stat-card">
           <div class="stat-number">∞</div>
-          <div class="stat-label">Problems left to solve</div>
+          <div class="stat-label">Challenges left to solve</div>
         </div>
       </div>
     </div>
@@ -596,7 +658,7 @@
     <p class="section-label">02 — Education</p>
     <h2 class="section-heading">Academic Journey</h2>
     <p class="section-sub">
-      The institutions that shaped how I think and approach problems.
+      The institutions that shaped/ Shaping how I think and approach problems.
     </p>
   </div>
 
